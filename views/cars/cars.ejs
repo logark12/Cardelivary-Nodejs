@@ -1,0 +1,238 @@
+<%- include('../partials/head') -%>
+
+<%- include('../partials/nav') -%>
+
+    <div class="main-content">
+
+        <div class="page-content">
+            <div class="container-fluid">
+
+                <!-- start page title -->
+                <div class="row">
+                    <div class="col-12">
+                        <div class="page-title-box d-flex align-items-center justify-content-between">
+                            <h4 class="mb-0 font-size-18">Cars</h4>
+
+                            <div class="page-title-right">
+                                <ol class="breadcrumb m-0">
+                                    <li class="breadcrumb-item"><a href="javascript: void(0);">Cars</a></li>
+                                    <li class="breadcrumb-item active">Register Car</li>
+                                </ol>
+                            </div>
+
+                           
+
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-xl-12">
+                        <div class="card" style="height: 400px;">
+                            <div class="card-body">
+                                <h4 class="card-title">Car register</h4>
+                                <p class="card-title-desc"></p>
+                                <form class="needs-validation storeRegister" id="placeForm" action="/car/add" method="POST" novalidate>
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label for="validationCustom01">Car Name</label>
+                                                <input type="text" class="form-control" id="plaseName" placeholder="Car name" name="carName" required>
+                                                <div class="valid-feedback">
+                                                    Looks good!
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label for="validationCustom02">Car Typer</label>
+                                                <input type="text" class="form-control" id="validationCustom02" placeholder="Car Type" name="CarType" required>
+                                                <div class="valid-feedback">
+                                                    Looks good!
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="row">
+                                        <div class="col-md-2">
+                                            <button class="btn btn-primary mt-3" type="submit">Save</button>
+                                        </div>
+                                        
+                                            
+                                            <div class="col-md-3">
+                                               
+                                                <div class="custom-file mb-3">
+                                                    
+                                                    <input type="file" name="img2" id="file"  class="filepond filepond--item" multiple>
+                                                    
+                                                  </div>
+                                            </div>
+                                        
+                                        
+                                            
+                                            <div class="col-md-3">
+                                                <div class="custom-file mb-3">
+                                                    <input type="file" name="img" id="file"  class="filepond filepond--item" multiple>
+                                                    
+                                                  </div>
+                                            </div>
+                                        
+                                    </div>
+                                        
+                                        
+                                        <!-- <div class="col-md-3">
+                                            <div class="ui field">
+                                                <label for="img">Image</label>
+                                                <!-- class="filepond filepond--item" -->
+                                                <!-- <input type="file" name="img" id="img"  multiple>
+                                         
+                                                <label for="img">Image</label>
+                                                <input type="file" name="img2" id="img"  multiple>
+                                            </div>
+                                        </div> --> 
+                                       
+                                    <div class="row"></div>
+                                    <br>
+                                    <br>
+                                    <br>
+                                   
+                                </form>
+                            </div>
+                        </div>
+                        <!-- end card -->
+                    </div> <!-- end col -->
+
+                </div>
+
+                <div class="row">
+                    <div class="col-xl-12">
+                        <div class="card">
+                            <div class="card-body">
+                                <h4 class="card-title">Car registered</h4>
+                                <p class="card-title-desc">
+                                </p>
+                                <div class="row">
+                                    <div class="col-md-12">
+                                <div class="table-responsive">
+                                    <table   id="" class="table table-striped table-bordered dt-responsive nowrap datatable" style="border-collapse: collapse; border-spacing: 0; width: 100%;">
+                                        <thead>
+                                            <tr>
+                                                <th>#</th>
+                                                <th>Car Name</th>
+                                                <th>Car Type</th>
+                                                
+                                                <th>Remarkes</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            
+                                <% if(car.length > 0 ){ %>
+                                    <% let i = 1
+                                                   
+                                                %>
+                                    <% car.forEach(car => { %>
+                                            <tr>
+                                                
+                                                <th scope="row"><%= i %></th>
+                                                <td><%= car.carName %></td>
+                                                <td><%= car.CarType %></td>
+                                                
+                                                <td>
+                                                    <a class="btn btn-xs far fa-eye fa-2x" id="edit_button1" title="Edit "  href="car/detail/<%=car._id %>" style="color:  #3b31fd;"></a>
+                                                    <a class="btn btn-xs far fa-edit fa-2x" id="edit_button1" title="Edit "  href="car/update/<%=car._id %>" style="color: #ff9800;"></a>
+                                                    <a class="btn btn-xs ion fa fa-trash fa-2x" href="/car/delete/<%=car._id %>" title="Delete" style="color: #ec4561; ">&nbsp;</a>
+                                                </td>
+                                               <%  i =i+1 %>
+                                            </tr>
+                                            <% })%>
+                                            <% } else {%>
+                                                <p>there is no blogs yet.......</p>
+                                            <% } %>
+                                            
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                            </div>
+    
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- end page title -->
+               
+          
+            <!-- end row -->
+
+            
+        </div>
+        <!-- End Page-content -->
+
+        
+        <!-- <footer class="footer">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-sm-6">
+                        <script>document.write(new Date().getFullYear())</script> © Skote.
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="text-sm-right d-none d-sm-block">
+                            Design & Develop by Themesbrand
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </footer> -->
+    </div>
+
+    <script>
+         document.addEventListener('DOMContentLoaded', function () {
+            FilePond.registerPlugin(
+                FilePondPluginImagePreview,
+                FilePondPluginImageResize,
+                FilePondPluginFileEncode,
+     
+
+
+            );
+            // https://pqina.nl/filepond/docs/patterns/api/filepond-object/#setting-options
+            FilePond.setOptions({
+                stylePanelAspectRatio: 30 / 50,
+                imageResizeTargetWidth: 100,
+                imageResizeTargetHeight: 50,
+            })
+            FilePond.parse(document.body);
+        });
+        // const form = document.querySelector('.storeRegister');
+        // form.addEventListener('submit', async (e) => {
+        //     e.preventDefault();
+        //     const storeName = form.storeName.value;
+        //     const storeMname = form.storeManagerName.value;
+        //     const storeMphone = form.storeManagerPhone.value;
+        //     const storeLocation1 = form.storeLocation1.value;
+        //     const storeLocation2 = form.storeLocation2.value;
+            
+        //     const storeType = form.storeType.value;
+            
+        //     try {
+        //         const res = await fetch('/store', {
+        //             method: 'POST',
+        //             body: JSON.stringify({storeName, storeMname, storeMphone, storeType, storeLocation1,storeLocation2}),
+        //             headers: {'Content-Type': 'application/json'}
+        //         })
+                
+        //         const data = await res.json();
+        //         if(data.store){
+        //             location.assign('/store')
+        //         }
+        //     } catch (err) {
+        //         console.log(err)
+        //     }
+        // });
+
+       
+    </script>
+    <!-- <script src="/map.js"></script> -->
+    <script src="/add.js"></script>
+    <%- include('../partials/footer') -%>

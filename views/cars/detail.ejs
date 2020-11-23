@@ -1,0 +1,140 @@
+<%- include('../partials/head') -%>
+
+<%- include('../partials/nav') -%>
+
+    <div class="main-content">
+
+        <div class="page-content">
+            <div class="container-fluid">
+
+                <!-- start page title -->
+                <div class="row">
+                    <div class="col-12">
+                        <div class="page-title-box d-flex align-items-center justify-content-between">
+                            <h4 class="mb-0 font-size-18">Cars</h4>
+
+                            <div class="page-title-right">
+                                <ol class="breadcrumb m-0">
+                                    <li class="breadcrumb-item"><a href="javascript: void(0);">Cars</a></li>
+                                    <li class="breadcrumb-item active">register Car</li>
+                                </ol>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-6">
+        
+                    <div class="card">
+                        <div class="card-body">
+
+                            
+
+                            <dl class="row mb-0">
+                                <dt class="col-sm-3">car name</dt>
+                                <dd class="col-sm-9"><%= car.carName %></dd>
+                                <dd class="col-sm-9 offset-sm-3"></dd>
+                                <h1></h1>
+                                <dt class="col-sm-3">Car Type</dt>
+                                <dd class="col-sm-9"><%= car.CarType %></dd>
+                                <dd class="col-sm-9 offset-sm-3"></dd>
+                                
+                                <br>
+                                <br>
+
+                        </div>
+                    </div>
+
+                </div>
+                    <div class="col-lg-6">
+                        <div class="card">
+                            <div class="card-body">
+
+                               
+
+                                <div class="zoom-gallery">
+                                    <a class="float-left" href="<%= car.coverImagePath %>" title="Project 1"><img src="<%= car.coverImagePath %>" alt="" width="275"></a>
+                                    <a class="float-left" href="<%= car.coverImagePath2 %>" title="Project 2"><img src="<%= car.coverImagePath2 %>" alt="" width="275"></a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+              
+                <!-- end page title -->
+                </div>
+          
+            <!-- end row -->
+
+            
+        </div>
+        <!-- End Page-content -->
+
+        
+        <!-- <footer class="footer">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-sm-6">
+                        <script>document.write(new Date().getFullYear())</script> © Skote.
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="text-sm-right d-none d-sm-block">
+                            Design & Develop by Themesbrand
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </footer> -->
+    </div>
+
+    <script>
+         document.addEventListener('DOMContentLoaded', function () {
+            FilePond.registerPlugin(
+                FilePondPluginImagePreview,
+                FilePondPluginImageResize,
+                FilePondPluginFileEncode,
+     
+
+
+            );
+            // https://pqina.nl/filepond/docs/patterns/api/filepond-object/#setting-options
+            FilePond.setOptions({
+                stylePanelAspectRatio: 30 / 50,
+                imageResizeTargetWidth: 100,
+                imageResizeTargetHeight: 50,
+            })
+            FilePond.parse(document.body);
+        });
+        // const form = document.querySelector('.storeRegister');
+        // form.addEventListener('submit', async (e) => {
+        //     e.preventDefault();
+        //     const storeName = form.storeName.value;
+        //     const storeMname = form.storeManagerName.value;
+        //     const storeMphone = form.storeManagerPhone.value;
+        //     const storeLocation1 = form.storeLocation1.value;
+        //     const storeLocation2 = form.storeLocation2.value;
+            
+        //     const storeType = form.storeType.value;
+            
+        //     try {
+        //         const res = await fetch('/store', {
+        //             method: 'POST',
+        //             body: JSON.stringify({storeName, storeMname, storeMphone, storeType, storeLocation1,storeLocation2}),
+        //             headers: {'Content-Type': 'application/json'}
+        //         })
+                
+        //         const data = await res.json();
+        //         if(data.store){
+        //             location.assign('/store')
+        //         }
+        //     } catch (err) {
+        //         console.log(err)
+        //     }
+        // });
+
+       
+    </script>
+    <!-- <script src="/map.js"></script> -->
+    <script src="/add.js"></script>
+    <%- include('../partials/footer') -%>

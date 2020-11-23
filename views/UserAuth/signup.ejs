@@ -1,0 +1,176 @@
+<%- include('../partials/head') -%>
+<!-- aria-describedby="emailHelp -->
+
+
+<div class="home-btn d-none d-sm-block">
+</div>
+<div class="account-pages my-5 pt-sm-5">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-md-8 col-lg-6 col-xl-5" style="margin-top: 11%;">
+                <div class="card overflow-hidden">
+                    <div class="bg-soft-primary">
+                        <div class="row">
+                            <div class="col-7">
+                                <div class="text-primary p-4">
+                                    <h5 class="text-primary">Welcome Back !</h5>
+                                    <p>Sign in to continue to Car Delivery Management Admin.</p>
+                                </div>
+                            </div>
+                            <div class="col-5 align-self-end">
+                                <img src="/assets/images/profile-img.png" alt="" class="img-fluid">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-body pt-0"> 
+                        <div>
+                         
+                        </div>
+                        <div class="p-2">
+                            <form class="form-horizontal" >
+
+                                <div class="form-group">
+                                    <label for="username">username</label>
+                                    <input type="text" class="form-control" id="username" name="username" placeholder="Enter username">
+                                    <small class="userError text-danger h6"></small>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="username">email</label>
+                                    <input type="text" class="form-control" id="email" name="email" placeholder="Enter Email">
+                                    <small class="emailError text-danger h6"></small>
+                                </div>
+        
+                                <div class="form-group">
+                                    <label for="userpassword">Password</label>
+                                    <input type="password" class="form-control" id="password" name="password" placeholder="Enter password">
+                                    <small class="passwordError text-danger h6"></small>
+                                </div>
+        
+                                <div class="custom-control custom-checkbox">
+                                    <input type="checkbox" class="custom-control-input" id="customControlInline">
+                                    <label class="custom-control-label" for="customControlInline">Remember me</label>
+                                </div>
+                                
+                                <div class="mt-3">
+                                    <button class="btn btn-primary btn-block waves-effect waves-light" type="submit">Log In</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+                <div class="mt-5 text-center">
+                    <p class="signup-link">Already have an account? <a style="border-bottom: 0;" href="/login">Log in</a></p>
+                    <div>
+                        <p>© 2020 Car Delivery Management Admin. Crafted with <i class="mdi mdi-heart text-danger"></i> by Log Ark</p>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- 
+
+<div class="form-container">
+    <div class="form-form">
+        <div class="form-form-wrap">
+            <div class="form-container">
+                <div class="form-content">
+
+                    <h1 class="">Sign Up</h1>
+                    
+                    <form class="text-left">
+                        <div class="form">
+
+                            <div id="username-field" class="field-wrapper input">
+                                
+                                <input style="padding-left: 10px;" id="username" name="username" type="text" class="form-control" placeholder="Username">
+                                <small style="color: red;" class="userError"></small>
+                            </div>
+                            <div id="email-field" class="field-wrapper input">
+                                
+                                <input style="padding-left: 10px;" id="email" name="email" type="text" value="" placeholder="Email">
+                                <small style="color: red;" class="emailError"></small>
+                            </div>
+                            <div id="password-field" class="field-wrapper input mb-2">
+                               
+                                <input style="padding-left: 10px;" id="password" name="password" type="password" value="" placeholder="Password">
+                                <small style="color: red;" class="passwordError"></small>
+                            </div>
+                            <div class="field-wrapper terms_condition">
+                                <div class="n-chk new-checkbox checkbox-outline-primary">
+                                    <!-- <label class="new-control new-checkbox checkbox-outline-primary">
+                                      <input type="checkbox" class="new-control-input">
+                                      <span class="new-control-indicator"></span><span>I agree to the <a href="javascript:void(0);">  terms and conditions </a></span>
+                                    </label> -->
+                                </div>
+                            </div>
+                            <div class="d-sm-flex justify-content-between">
+                                <p class="signup-link">Already have an account? <a style="border-bottom: 0;" href="/login">Log in</a></p>
+                                <!-- <div class="field-wrapper toggle-pass">
+                                    <p class="d-inline-block">Show Password</p>
+                                    <label class="switch s-primary">
+                                        <input type="checkbox" id="toggle-password" class="d-none">
+                                        <span class="slider round"></span>
+                                    </label>
+                                </div> -->
+                                <!-- <div class="field-wrapper">
+                                    <button type="submit" class="btn btn-primary" value="">Sing Up</button>
+                                </div>
+                            </div>
+
+                        </div>
+                    </form>                        
+                    <p class="terms-conditions">© 2020 All Rights Reserved. <a href="index.html">Logark Team</a> @Logark </p>
+
+                </div>                    
+            </div>
+        </div>
+    </div>
+    
+</div> --> 
+</body>
+
+<script>
+    const form = document.querySelector('form');
+    const userError = document.querySelector('.userError');
+    const emailError = document.querySelector('.emailError');
+    const passwordError = document.querySelector('.passwordError')
+    console.log(userError.textContent)
+
+    form.addEventListener('submit', async (e) =>{
+        e.preventDefault()
+
+        // rest errors
+        userError.textContent = ""
+        emailError.textContent = ""
+        passwordError.textContent  = ""
+
+        const username = form.username.value
+        const email = form.email.value
+        const password = form.password.value
+        
+        try {
+            const res = await fetch('/signup', {
+                method: 'POST',
+                body: JSON.stringify({username, email, password}),
+                headers: {'Content-Type': 'application/json'}
+            })
+            const data = await res.json();
+            console.log(data)
+            if(data.errors){
+                userError.textContent = data.errors.username
+                emailError.textContent = data.errors.email
+                passwordError.textContent  = data.errors.password
+            }
+            if(data.user){
+                location.assign('/')
+            }
+        } catch (err) {
+            console.log(err)
+        }
+    })
+</script>
+<%- include('../partials/footer') -%>

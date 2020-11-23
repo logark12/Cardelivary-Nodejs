@@ -1,0 +1,220 @@
+<%- include('../partials/head') -%>
+
+<%- include('../partials/nav') -%>
+
+    <div class="main-content">
+
+        <div class="page-content">
+            <div class="container-fluid">
+
+                <!-- start page title -->
+                <div class="row">
+                    <div class="col-12">
+                        <div class="page-title-box d-flex align-items-center justify-content-between">
+                            <h4 class="mb-0 font-size-18">Assign Driver</h4>
+
+                            <div class="page-title-right">
+                                <ol class="breadcrumb m-0">
+                                    <li class="breadcrumb-item"><a href="javascript: void(0);">Cars</a></li>
+                                    <li class="breadcrumb-item active">Assign Driver</li>
+                                </ol>
+                            </div>
+
+                           
+
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-xl-12">
+                        <div class="card" style="height: 300px;">
+                            <div class="card-body">
+                                <h4 class="card-title">Assign Driver</h4>
+                                <p class="card-title-desc"></p>
+                                <form class="needs-validation storeRegister" id="placeForm"  novalidate>
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <select class="form-control errD select2" name="Carname" required>
+                                                    <option value="">Pleas select Driver Phone</option>
+                                                    <% if(car.length > 0 ){ %>
+                                                    <% car.forEach(car => { %>
+                                                        <option value="<%= car.carName %>"><%= car.carName %></option>
+                                                     <% }) %>
+                                                     <% } %> 
+                                                </select>
+                                                </div>
+                                        </div>
+                                        
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                            <select class="form-control errD2 select2" name="DriverPhone" required>
+                                                <option value="">Pleas select Driver Phone</option>
+                                                <% if(driver.length > 0 ){ %>
+                                                <% driver.forEach(driver => { %>
+                                                    <option value="<%= driver.PhoneNumber %>"><%= driver.PhoneNumber %>  <%= driver.fullName %></option>
+                                                 <% }) %>
+                                                 <% } %> 
+                                            </select>
+                                            <small class="driverError text-danger h6"></small>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <button class="btn btn-primary mt-3" type="submit">Save</button>
+                                    
+                                        
+                                      
+                                       
+                                    
+                                   
+                                   
+                                </form>
+                            </div>
+                        </div>
+                        <!-- end card -->
+                    </div> <!-- end col -->
+
+                </div>
+
+                <div class="row">
+                    <div class="col-xl-12">
+                        <div class="card">
+                            <div class="card-body">
+                                <h4 class="card-title">Assigned Drivers</h4>
+                                <p class="card-title-desc">
+                                </p>
+    
+                                <div class="table-responsive">
+                                        <table   id="" class="table table-striped table-bordered dt-responsive nowrap datatable" style="border-collapse: collapse; border-spacing: 0; width: 100%;">
+                                        <thead>
+                                            <tr>
+                                                <th>#</th>
+                                                <th>Car Name</th>
+                                                <th>Car Type</th>
+                                                <th>Remarkes</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <% if(AssingD.length > 0 ){ %>
+                                                <% let i = 1  %>
+                                                <% AssingD.forEach(AssingD => { %>
+                                                        <tr>
+                                                            <th scope="row"><%= i %></th>
+                                                            <td><%= AssingD.Carname %></td>
+                                                            <td><%= AssingD.DriverPhone %></td>
+                                                            <td>
+                                                                <a class="btn btn-xs far fa-edit fa-2x" id="edit_button1" title="Edit "  href="/car/assing/update/<%=AssingD._id %>" style="color: #ff9800;"></a>
+                                                                <a class="btn btn-xs ion fa fa-trash fa-2x"  href="/car/assing/delete/<%=AssingD._id %>" title="Delete" style="color: #ec4561; ">&nbsp;</a>
+                                                              
+                                                            </td>
+                                                           <%  i =i+1 %>
+                                                        </tr>
+                                                        <% })%>
+                                                        <% } else {%>
+                                                            <p>there is no blogs yet.......</p>
+                                                        <% } %>
+                                
+                                            
+                                        </tbody>
+                                    </table>
+                                </div>
+    
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- end page title -->
+               <input type="hidden" name="alertSuccess" class="alertSuccess" id="alertSuccess">
+          
+            <!-- end row -->
+
+            
+        </div>
+        </footer>
+    </div>
+
+    <script>
+        const form = document.querySelector('.storeRegister');
+        const driverError = document.querySelector('.driverError');
+        const errB = document.querySelector('.errD');
+        const errB2 = document.querySelector('.errD2');
+        const alertSuccess = document.querySelector('.alertSuccess');
+        form.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            driverError.textContent = ""
+            
+            const Carname = form.Carname.value;
+            const DriverPhone = form.DriverPhone.value;
+            
+         //   console.log(Carname, DriverPhone)
+            try {
+                const res = await fetch('/car/assing', {
+                    method: 'POST',
+                    body: JSON.stringify({Carname, DriverPhone}),
+                    headers: {'Content-Type': 'application/json'}
+                })
+                
+                const data = await res.json();
+                console.log(data.errors)
+                if(data.errors){
+                    // driverError.textContent = data.errors.Driver 
+                    // errB.classList.add('border-danger') 
+                    // errB2.classList.add('border-danger') 
+                    toastr.error(data.errors.Carname, "Error");
+                    toastr.error(data.errors.DriverPhone, "Error");
+
+                }else{
+                    toastr.success(data.success, "Success");
+                    setTimeout(function(){window.location.href ='/car/assing'; },300)
+                    
+                }
+            } catch (err) {
+                console.log(err)
+            }
+        });
+
+        // function Delete(obj) {
+            
+        //     var row = $(obj).closest('tr');
+        //    DeleteID = 100; // delete assing nation date 
+         
+       
+        //     swal({
+        //         title: "Are you sure?",
+        //         text: "You won't be able to revert this!",
+        //         type: "warning", showCancelButton: !0,
+        //         confirmButtonColor: "#34c38f",
+        //         cancelButtonColor: "#f46a6a",
+        //         confirmButtonText: "Yes, delete it!"
+        //     },
+        //         function (isConfirm) {
+        //             if (isConfirm) {
+        //                 $.ajax({
+        //                     type: "POST",
+        //                     url: "Registration.asmx/DeleteBillReceipts",
+        //                     data: '{ID:"' + ReceiptID + '",UserID:"' + UserID + '",Remarks:"' + Remarks + '"}',
+        //                     contentType: "application/json",
+        //                     dataType: "json",
+        //                     success: function (data) {
+        //                         for (var i = 0; i < data.d.length; i++) {
+        //                             var Message = data.d;
+        //                         }
+        //                         if (Message.substring(0, 6) != "Error:") {
+        //                             toastr.success(Message, "Success");
+        //                             $("#txtRemarks", row).val("");
+        //                             load_Contro_Generation();
+        //                         }
+        //                         else {
+        //                             toastr.error(Message);
+        //                         }
+        //                     }
+        //                 });
+        //                 swal.close();
+        //             } else {
+        //                 swal.close();
+        //             }
+        //         });
+        //     }
+    </script>
+    <%- include('../partials/footer') -%>
