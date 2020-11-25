@@ -14,16 +14,17 @@ const taskRouoter = require('./routers/tasksRoute')
 const reportRouter = require('./routers/repotRoute')
 const homeRoute = require('./controllers/homeController')
 // importing midlleware
-const { requireAuth, checkUser } = require('./middleware/authmeddileware')
+const { requireAuth, checkUser, UserRole } = require('./middleware/authmeddileware')
 
 const app = express()
-
+app.use(express.static(__dirname + '/public'));
+app.timeout = 0;
 // midllewares
 
 app.use(bodyParser.json({limit: '5mb'}));
 app.use(bodyParser.urlencoded({limit: '5mb', extended: true}));
 
-app.use(express.static('public'))
+
 app.use(express.json())
 app.use(cookeiParser())
 
@@ -39,14 +40,14 @@ mongoose.connect(dbURI, { useNewUrlParser: true, useUnifiedTopology: true, useCr
 // routes
 app.get('*', checkUser)
 
-app.get('/',requireAuth,  homeController.get_Home)
+app.get('/',[requireAuth, UserRole],  homeController.get_Home)
 
 app.use(userAuthRouts)
-app.use("/repots", reportRouter)
-app.use(storeMrouter )
-app.use('/tasks', taskRouoter)
-app.use('/Driver', DriverRouter)
-app.use('/car', CarRouts )
+app.use("/repots",UserRole, reportRouter)
+app.use(UserRole,storeMrouter )
+app.use('/tasks',UserRole, taskRouoter)
+app.use('/Driver',UserRole, DriverRouter)
+app.use('/car',UserRole, CarRouts )
 
 
-app.use('/api/v1/places', require('./routers/place'))
+app.use('/api/v1/places',UserRole, require('./routers/place'))

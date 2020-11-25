@@ -168,7 +168,16 @@
 
             
             </li>
-              
+            <% if(Role ){ %>
+            <% if(Role == 'A'){ %>
+                <li>
+                    <a href="/userRegistration" class=" waves-effect">
+                        <i class="fas fa-user-plus" aria-hidden="true"></i>
+                        <span>User Registration</span>
+                    </a>
+                </li>
+                <% } %>
+                <% } %>
               
               <li>
                 <a href="/faqs" class=" waves-effect">
@@ -176,9 +185,7 @@
                     <span>FAQs</span>
                 </a>
             </li>
-
-         
-
+            
           </ul>
       </div>
       <!-- Sidebar -->

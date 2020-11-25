@@ -27,7 +27,7 @@ const taskSchema = mongoose.Schema({
     Driver:
         {type: mongoose.Schema.Types.ObjectId, ref: 'Driver'}
       
-})
+},{timestamps: true});
 
 taskSchema.pre('save', async function(next){
     const driver = await DriverModel.findOne({'PhoneNumber': this.teamMember});

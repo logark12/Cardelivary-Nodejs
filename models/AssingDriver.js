@@ -24,7 +24,7 @@ const AssingSchema = new Schema({
         index: {unique: true},
         dropDups: [true, 'not allowed duplicate value'],
     }   
-});
+},{timestamps: true});
 
 AssingSchema.pre('save', async function(next){
     const driver = await DriverModel.findOne({'PhoneNumber': this.DriverPhone});

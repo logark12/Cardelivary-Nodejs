@@ -34,7 +34,7 @@ const ErrorHandler = (err) =>{
     
       return errors;
 }
-const MaxAge = 2 *24 * 60 * 60
+const MaxAge = 1 *24 * 60 * 60
 const createToken = (id) => {
     return jwt.sign({id},'arkweb secret', {
         expiresIn: MaxAge
@@ -65,7 +65,7 @@ module.exports.signup_post = async (req, res) =>{
 
 module.exports.login_post = async (req, res) =>{
     const { email, password } = req.body;
-    console.log(email, password, '....')
+    // console.log(email, password, '....')
     try {
       const user = await User.login(email, password)
       const token = createToken(user._id)
@@ -87,4 +87,41 @@ module.exports.logout_get = (req, res) =>{
 
 module.exports.faqs_get = (req, res) => {
     res.render('faqs')
+}
+
+module.exports.userRegistration_get = async (req, res) => {
+    try {
+        
+        const users = await User.find({userType:'U'})
+        
+        res.render('UserAuth/userRegistration', {users})
+    } catch (err) {
+        console.log(err)
+    }
+
+}
+
+module.exports.userRegistration_post = async (req, res) => {
+    const {username, email, password, userType} = req.body
+    try {
+        const user = await User.create({username, email, password, userType})
+        res.status(201).json({user: user._id})
+    } catch (err) {
+        const errors = ErrorHandler(err);
+        console.log(err)
+        res.status(400).json({errors})
+    }
+}
+
+
+module.exports.userDelete = (req, res) =>{
+    const id = req.params.id
+
+    User.findByIdAndDelete(id)
+    .then(result => {
+        res.redirect('/userRegistration')
+    })
+    .catch(err => {
+        console.log(err)
+    })
 }

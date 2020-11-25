@@ -1,0 +1,202 @@
+<%- include('../partials/head') -%>
+
+<%- include('../partials/nav') -%>
+
+    <div class="main-content">
+
+        <div class="page-content">
+            <div class="container-fluid">
+
+                <!-- start page title -->
+                <div class="row">
+                    <div class="col-12">
+                        <div class="page-title-box d-flex align-items-center justify-content-between">
+                            <h4 class="mb-0 font-size-18">Store</h4>
+
+                            <div class="page-title-right">
+                                <ol class="breadcrumb m-0">
+                                    <li class="breadcrumb-item"><a href="javascript: void(0);">User Register</a></li>
+                                    <!-- <li class="breadcrumb-item active">Starter Page</li> -->
+                                </ol>
+                            </div>
+
+                           
+
+                        </div>
+                    </div>
+                </div>
+                <!-- end page title -->
+                <div class="row">
+                    <div class="col-xl-12">
+                        <div class="card">
+                            <div class="card-body">
+                                <h4 class="card-title">User register</h4>
+                                <p class="card-title-desc"></p>
+                                <form class="needs-validation storeRegister" id="placeForm" novalidate>
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label for="validationCustom01">User name</label>
+                                                <input type="text" class="form-control" id="plaseName" placeholder="User name" name="userName" required>
+                                                <div class="valid-feedback">
+                                                    Looks good!
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label for="validationCustom02">User Email</label>
+                                                <input type="email" class="form-control" id="validationCustom02" placeholder="Email" name="Email" required>
+                                                <div class="valid-feedback">
+                                                    Looks good!
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label for="validationCustom04">User Password</label>
+                                                <input type="password" class="form-control" id="Place_adress" placeholder="Password" name="Password" required>
+                                                <div class="invalid-feedback">
+                                                    Please provide a valid Location.
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <label for="validationCustom05">User Type</label>
+                                            <select class="form-control select2" name="userType" required>
+                                                <option value="">Pleas select user type</option>
+                                                <option value="A">Admin</option>
+                                                <option value="U">User</option>
+                                            </select>
+                                        </div>
+                                        </div>
+                                    </div>
+                                    
+                                    <button class="btn btn-primary mt-3" type="submit">Save</button>
+                                </form>
+                            </div>
+                        </div>
+                        <!-- end card -->
+                    </div> <!-- end col -->
+
+                    <div class="row">
+                        <div class="col-xl-12">
+                            <div class="card">
+                                <div class="card-body">
+                                    <h4 class="card-title">Store registered</h4>
+                                    <p class="card-title-desc">
+                                    </p>
+        
+                                    <div class="table-responsive">
+                                        <table   id="" class="table table-striped table-bordered dt-responsive nowrap datatable" style="border-collapse: collapse; border-spacing: 0; width: 100%;">
+                                            <thead>
+                                                <tr>
+                                                    <th>#</th>
+                                                    <th>User Name</th>
+                                                    <th>Email</th>
+                                                    <th>User Type</th>
+                                                    <!-- <th>Store Location</th> -->
+                                                    <th>Remarkes</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                
+                                    <% if(users.length > 0 ){ %>
+                                        <% let i = 1
+                                                       
+                                                    %>
+                                        <% users.forEach(user => { %>
+                                                <tr>
+                                                    
+                                                    <th scope="row"><%= i %></th>
+                                                    <td><%= user.username %></td>
+                                                    <td><%= user.email %></td>
+
+                                                    <%   if (user.userType == "A")
+                                                        { %>
+                                                            <td><span style="font-size: 12px;" class='badge badge-danger'>Admin</span></td>
+                                                            <%  }
+                                                        else
+                                                        {  %>
+                                                           <td><span style="font-size: 12px;" class='badge badge-info'>User</span></td>
+                                                           <%    }  %>
+        
+                                                    
+                                                    <td>
+                                                        <!-- <a class="btn btn-xs far fa-edit fa-2x" id="edit_button1" title="Edit "  href="/edit/<%=user._id %>" style="color: #ff9800;"></a> -->
+                                                        <a class="btn btn-xs ion fa fa-trash fa-2x" href="user/delete/<%=user._id %>" title="Delete" style="color: #ec4561; ">&nbsp;</a>
+                                                    </td>
+                                                   <%  i =i+1 %>
+                                                </tr>
+                                                <% })%>
+                                                <% } else {%>
+                                                    <p>there is no blogs yet.......</p>
+                                                <% } %>
+                                                
+                                            </tbody>
+                                        </table>
+                                    </div>
+        
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- end row -->
+
+                
+                <!-- end row -->
+            </div>
+
+            <!-- end row -->
+
+            
+        </div>
+        <!-- End Page-content -->
+
+        
+       
+    </div>
+
+    <script>
+        const form = document.querySelector('.storeRegister');
+        form.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const username = form.userName.value;
+            const email = form.Email.value;
+            const password = form.Password.value;
+            const userType = form.userType.value;
+            
+            try {
+                const res = await fetch('/userRegistration', {
+                    method: 'POST',
+                    body: JSON.stringify({username, email, password, userType}),
+                    headers: {'Content-Type': 'application/json'}
+                })
+                
+                const data = await res.json();
+
+                if(data.errors){
+                    // driverError.textContent = data.errors.Driver 
+                    // errB.classList.add('border-danger') 
+                    // errB2.classList.add('border-danger') 
+                    toastr.error(data.errors.username, "Error");
+                    toastr.error(data.errors.email, "Error");
+                    toastr.error(data.errors.password, "Error");
+
+                }else{
+                    toastr.success(data.success, "Success");
+                    setTimeout(function(){location.assign('/userRegistration'); },300)
+                    
+                }
+            } catch (err) {
+                console.log(err)
+            }
+        });
+
+    </script>
+
+    <%- include('../partials/footer') -%>

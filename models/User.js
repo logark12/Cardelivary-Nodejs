@@ -19,8 +19,13 @@ const userSchema = mongoose.Schema({
         type: String,
         required: [true, 'pleas inter a password'],
         minlength: [6, 'minimum password lenght is 6 chracters']
+    },
+    userType:{
+        type: String,
+        enum: ['A', 'U'],
+        required: true,
     }
-});
+},{timestamps: true});
 
 userSchema.pre('save', async function(next){
     const salt = await bcrypt.genSalt();
