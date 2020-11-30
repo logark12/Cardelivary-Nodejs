@@ -102,13 +102,16 @@
             </li>
              
               <li class="menu-title">Apps</li>
-
+              <% if(Role ){ %>
+                <% if(Role == 'A'){ %>
               <li>
                   <a href="/store" class=" waves-effect">
                     <i class="bx bx-store"></i>
                       <span>Store</span>
                   </a>
               </li>
+              <% } %>
+              <% } %>
 
               <li>
                   <a href="/view-map" class=" waves-effect">
@@ -118,7 +121,8 @@
                   </a>
               </li>
 
-
+              <% if(Role ){ %>
+                <% if(Role == 'A'){ %>
               <li>
                   <a href="javascript: void(0);" class="has-arrow waves-effect">
                     <i class="fas fa-dharmachakra"></i>
@@ -152,6 +156,8 @@
 
                   </ul>
               </li>
+              <% } %>
+              <% } %>
 
               <li>
                 <a href="javascript: void(0);" class="has-arrow waves-effect">

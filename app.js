@@ -14,7 +14,7 @@ const taskRouoter = require('./routers/tasksRoute')
 const reportRouter = require('./routers/repotRoute')
 const homeRoute = require('./controllers/homeController')
 // importing midlleware
-const { requireAuth, checkUser, UserRole } = require('./middleware/authmeddileware')
+const { requireAuth, checkUser, UserRole, isAdmin } = require('./middleware/authmeddileware')
 
 const app = express()
 app.use(express.static(__dirname + '/public'));
@@ -44,10 +44,10 @@ app.get('/',[requireAuth, UserRole],  homeController.get_Home)
 
 app.use(userAuthRouts)
 app.use("/repots",UserRole, reportRouter)
-app.use(UserRole,storeMrouter )
-app.use('/tasks',UserRole, taskRouoter)
-app.use('/Driver',UserRole, DriverRouter)
-app.use('/car',UserRole, CarRouts )
+app.use(storeMrouter )
+app.use('/tasks', isAdmin, taskRouoter)
+app.use('/Driver',isAdmin, DriverRouter)
+app.use('/car',isAdmin, CarRouts )
 
 
 app.use('/api/v1/places',UserRole, require('./routers/place'))

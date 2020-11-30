@@ -52,6 +52,44 @@ const UserRole = async (req, res, next) => {
   }
 };
 
+const isAdmin = async (req, res, next) => {
+  const token = req.cookies.jwt;
+
+  // check json web token exists & is verified
+  if (token) {
+    jwt.verify(token, 'arkweb secret', async (err, decodedToken) => { 
+      if (err) {
+        console.log(err);
+        
+      } else {
+        
+        let user = await User.findById(decodedToken.id);
+        let Role = user.userType
+        
+        if (user.userType === 'A'){
+          res.locals.Role = Role;
+          console.log('i am here')
+          next();
+        }else{
+          res.locals.Role = Role;
+          res.redirect('/')
+          
+        }
+      }
+    })
+    .catch(err => {
+      console.log(err)
+    });
+  } else {
+    
+    if(req.url != '/login' || req.url != '/logout'){
+      res.redirect('/');
+     }
+    next();
+  }
+};
+
+
 // check current user
 const checkUser = async (req, res, next) => {
     const token = req.cookies.jwt;
@@ -73,4 +111,4 @@ const checkUser = async (req, res, next) => {
   };
   
   
-  module.exports = { requireAuth, checkUser, UserRole };
+  module.exports = { requireAuth, checkUser, UserRole, isAdmin };
