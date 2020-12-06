@@ -161,8 +161,10 @@
                     // driverError.textContent = data.errors.Driver 
                     // errB.classList.add('border-danger') 
                     // errB2.classList.add('border-danger') 
-                    toastr.error(data.errors.Carname, "Error");
-                    toastr.error(data.errors.DriverPhone, "Error");
+                    if(data.errors.Car){
+                        toastr.error(data.errors.Car, "Error");
+                    }
+                    toastr.error(data.errors.Driver, "Error");
 
                 }else{
                     toastr.success(data.success, "Success");

@@ -142,13 +142,13 @@ module.exports.Asing_Driver_post = async (req, res) => {
   console.log(req.body)
     try{
       const Assing = await AssingDriver.create(req.body);
-        res.status(200).json({"success":"Asing Driver Hass Been Successfully"})
-        res.redirect('/car/assing');
+      res.status(200).json({"success":"Asing Driver Hass Been Successfully"})
+      res.redirect('/car/assing');
       
     }catch (err){
-      const errors = ErrorHandler(err)
-      console.log(err.message)
-      res.status(400).json({errors})
+      const errors = ErrorHandler(err);
+      
+      res.status(400).json({errors});
     }
 };
 
@@ -187,12 +187,18 @@ module.exports.Asing_Driver_delete = (req, res) => {
 // error HANDLLER
 
 const ErrorHandler = (err) => {
-  console.log(err.code)
-  const errors = {Car: "", Driver: ""}
-  console.log(errors)
-    if(err.code === 11000){
-        errors.Driver = 'the Driver Allrady Have a Car'
-        return errors
+  console.log(err.message)
+  let errors = {Car: "", Driver: ""}
+
+    if(err.code === 11000 && err.message.includes('Driver')){
+        errors.Driver = 'the Driver Have Allrady a Car';
+        console.log(errors)
+        return errors;
+    }
+    if(err.code === 11000 && err.message.includes('Car')){
+        errors.Driver = 'the Car Allrady Have a Driver';
+        console.log(errors)
+        return errors;
     }
 
     if (err.message.includes('AssignD validation failed')) {
@@ -201,9 +207,10 @@ const ErrorHandler = (err) => {
         // console.log(val);
         // console.log(properties);
         errors[properties.path] = properties.message;
-        console.log(errors)
+        
       });
+      
     }
-    return errors
-
+    
+    return errors;
 }

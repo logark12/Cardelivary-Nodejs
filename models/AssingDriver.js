@@ -21,10 +21,12 @@ const AssingSchema = new Schema({
         type: mongoose.Schema.Types.ObjectId,
         ref: 'Driver',
         
-        index: {unique: true},
-        dropDups: [true, 'not allowed duplicate value'],
+        
     }   
 },{timestamps: true});
+
+AssingSchema.index({ Car: 1 }, { unique: true });
+AssingSchema.index({ Driver: 1 }, { unique: true, sparse: true });
 
 AssingSchema.pre('save', async function(next){
     const driver = await DriverModel.findOne({'PhoneNumber': this.DriverPhone});
