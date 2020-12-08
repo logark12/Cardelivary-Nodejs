@@ -25,9 +25,10 @@ module.exports.upload_post = async (req, res) => {
     });
 
     // SETTING IMAGE AND IMAGE TYPES
-    saveImage(car, img, img2);
     
+   
     try{
+      saveImage(car, img, img2);
         const newMovie = await car.save();
         // console.log(newMovie);  
         res.redirect('/car')  ;
@@ -38,7 +39,7 @@ module.exports.upload_post = async (req, res) => {
 
 function saveImage(movie, imgEncoded, imgEncoded2) {
     // CHECKING FOR IMAGE IS ALREADY ENCODED OR NOT
-    if (imgEncoded == null && imgEncoded2 == null) return;
+    if (!imgEncoded && !imgEncoded2) return;
   
     // ENCODING IMAGE BY JSON PARSE
     // The JSON.parse() method parses a JSON string, constructing the JavaScript value or object described by the string
@@ -147,7 +148,6 @@ module.exports.Asing_Driver_post = async (req, res) => {
       
     }catch (err){
       const errors = ErrorHandler(err);
-      
       res.status(400).json({errors});
     }
 };

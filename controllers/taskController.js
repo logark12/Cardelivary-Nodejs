@@ -25,6 +25,7 @@ const checkTaskIsDone = async () => {
         for(i= 0; i < tasks.length; i++){
             
             const date = new Date()
+            date.setHours( date.getHours() + 3 );
             // console.log(task[i].endDate)
             if (tasks[i].endDate < date){
                 tasks[i].status = 'complete'
