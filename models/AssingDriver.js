@@ -50,22 +50,3 @@ const AssignModel = mongoose.model('AssignD', AssingSchema);
 module.exports = AssignModel
 
 
-const tasks = async () => {
-    try {
-        const task = await AssignModel.find({})
-        .populate("Driver")
-        .populate("Car")
-        for(i= 0; i < task.length; i++){
-            
-            // 
-            // console.log(task)
-            
-        }
-        
-        // console.log(task)
-    } catch (err) {
-        console.log(err)
-    }
-}
-
-tasks()

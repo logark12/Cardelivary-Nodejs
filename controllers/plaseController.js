@@ -16,18 +16,3 @@ exports.getStore =async (req, res, next) =>{
     }
 }
 
-// exports.addStore =async (req, res, next) =>{
-
-//     try {
-//         const store = await Store.create(req.body)
-
-//         return res.status(201).json({
-//             success: true,
-//             data: store
-//         })
-//     } catch (error) {
-        
-//           res.status(500).json({ error: 'Server error' });
-//           console.log(error)
-//     }
-// }

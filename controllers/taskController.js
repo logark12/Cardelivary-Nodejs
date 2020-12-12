@@ -26,15 +26,12 @@ const checkTaskIsDone = async () => {
             
             const date = new Date()
             date.setHours( date.getHours() + 3 );
-            // console.log(task[i].endDate)
             if (tasks[i].endDate < date){
                 tasks[i].status = 'complete'
-                // console.log('comp',  tasks[i].endDate, date)
                 tasks[i].save()
                 
             }else if(tasks[i].endDate > date){
                 tasks[i].status = 'pending'
-                // console.log('pendig', tasks[i].endDate)
                 tasks[i].save()
             }
         }

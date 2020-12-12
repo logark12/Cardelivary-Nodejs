@@ -42,17 +42,12 @@ const storeSchema = mongoose.Schema({
 
 
 storeSchema.pre('save', function(next) {
-    // const loc = await geocoder.geocode(this.Place_adress);
             this.location = {
                 type: 'Point',
                 coordinates: [this.storeLocation1, this.storeLocation2],
 
             }; 
             
-        // this.location = location
-        
-        // this.storeLocation1 = undefined;
-        // this.storeLocation2 = undefined;
         next();
 });
 

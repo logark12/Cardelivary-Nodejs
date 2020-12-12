@@ -176,47 +176,5 @@
             }
         });
 
-        // function Delete(obj) {
-            
-        //     var row = $(obj).closest('tr');
-        //    DeleteID = 100; // delete assing nation date 
-         
-       
-        //     swal({
-        //         title: "Are you sure?",
-        //         text: "You won't be able to revert this!",
-        //         type: "warning", showCancelButton: !0,
-        //         confirmButtonColor: "#34c38f",
-        //         cancelButtonColor: "#f46a6a",
-        //         confirmButtonText: "Yes, delete it!"
-        //     },
-        //         function (isConfirm) {
-        //             if (isConfirm) {
-        //                 $.ajax({
-        //                     type: "POST",
-        //                     url: "Registration.asmx/DeleteBillReceipts",
-        //                     data: '{ID:"' + ReceiptID + '",UserID:"' + UserID + '",Remarks:"' + Remarks + '"}',
-        //                     contentType: "application/json",
-        //                     dataType: "json",
-        //                     success: function (data) {
-        //                         for (var i = 0; i < data.d.length; i++) {
-        //                             var Message = data.d;
-        //                         }
-        //                         if (Message.substring(0, 6) != "Error:") {
-        //                             toastr.success(Message, "Success");
-        //                             $("#txtRemarks", row).val("");
-        //                             load_Contro_Generation();
-        //                         }
-        //                         else {
-        //                             toastr.error(Message);
-        //                         }
-        //                     }
-        //                 });
-        //                 swal.close();
-        //             } else {
-        //                 swal.close();
-        //             }
-        //         });
-        //     }
     </script>
     <%- include('../partials/footer') -%>
