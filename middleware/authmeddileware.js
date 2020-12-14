@@ -65,7 +65,6 @@ const isAdmin = async (req, res, next) => {
         
         if (user.userType === 'A'){
           res.locals.Role = Role;
-          console.log('i am here')
           next();
         }else{
           res.locals.Role = Role;

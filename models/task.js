@@ -31,7 +31,6 @@ const taskSchema = mongoose.Schema({
 
 taskSchema.pre('save', async function(next){
     const driver = await DriverModel.findOne({'PhoneNumber': this.teamMember});
-    // console.log(driver)
     if (driver){
         this.Driver = driver._id
         next();

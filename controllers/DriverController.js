@@ -14,7 +14,6 @@ module.exports.upload_get = async (req, res) => {
 };
 
 module.exports.upload_post = async (req, res) => {
-    // console.log(req.body)
     const {fullName, PhoneNumber, Address, ContectPersonName, ContactPersonPhone, img, img2} = req.body;
     const movie = new Movie({
         fullName,
@@ -29,7 +28,6 @@ module.exports.upload_post = async (req, res) => {
     
     try{
         const newMovie = await movie.save();
-        console.log(newMovie);  
         res.redirect('/Driver')  ;
     }catch (err){
         console.log(err);    
@@ -44,7 +42,6 @@ function saveImage(movie, imgEncoded, imgEncoded2) {
     // The JSON.parse() method parses a JSON string, constructing the JavaScript value or object described by the string
     const img =  JSON.parse(imgEncoded);
     const img2 =  JSON.parse(imgEncoded2);
-    console.log( "JSON parse: "+ img);
     
     // CHECKING FOR JSON ENCODED IMAGE NOT NULL 
     // https://developer.mozilla.org/en-US/docs/Web/HTTP/Basics_of_HTTP/MIME_types
@@ -110,7 +107,6 @@ module.exports.updateDriver = (req, res) => {
 };
 
 module.exports.updateDriver_post = async (req, res) => {
-    // console.log(req.body.img2)
     const {fullName, PhoneNumber, Address, ContectPersonName, ContactPersonPhone, img, img2} = req.body;
     // SETTING IMAGE AND IMAGE TYPES
     // const movie = {
@@ -120,7 +116,6 @@ module.exports.updateDriver_post = async (req, res) => {
     //     ContectPersonName,
     //     ContactPersonPhone
     // };
-    // console.log(movie)
     saveImage(req.body, img, img2);
     try{
         const Mymovie = await Movie.findByIdAndUpdate(req.params.id,req.body);

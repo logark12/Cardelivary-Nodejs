@@ -31,7 +31,6 @@ AssingSchema.index({ Driver: 1 }, { unique: true, sparse: true });
 AssingSchema.pre('save', async function(next){
     const driver = await DriverModel.findOne({'PhoneNumber': this.DriverPhone});
     const car = await CarModel.findOne({'carName': this.Carname});
-    console.log(driver._id, car._id)
     if (driver){
         this.Driver = driver._id
         

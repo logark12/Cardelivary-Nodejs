@@ -2,7 +2,7 @@ const express = require('express')
 const mongoose = require('mongoose')
 const cookeiParser = require('cookie-parser')
 const bodyParser = require("body-parser");
-
+const compression = require('compression');
 const homeController = require('./controllers/homeController')
 
 // importing routers
@@ -17,6 +17,7 @@ const homeRoute = require('./controllers/homeController')
 const { requireAuth, checkUser, UserRole, isAdmin } = require('./middleware/authmeddileware')
 
 const app = express()
+app.use(compression()); //use compression 
 app.use(express.static(__dirname + '/public'));
 app.timeout = 0;
 // midllewares

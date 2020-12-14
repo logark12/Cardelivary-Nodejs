@@ -9,7 +9,6 @@ const Driv = async () => {
         const driver = await AssignDriver.find()
         .populate('Driver')
     
-        // console.log(driver)
     }catch (err){
         console.log(err)
     }

@@ -25,7 +25,6 @@ module.exports.Store_register = async (req, res) => {
 
 module.exports.Store_delete = (req, res) => {
     const storeId = req.params.id
-    console.log(storeId)
     Store.findByIdAndDelete(storeId)
     .then(result => {
         res.redirect('/store')
@@ -47,7 +46,6 @@ module.exports.Store_update = (req, res) => {
 }
 
 module.exports.Store_set_update = async (req, res) => {
-    console.log(req.body)
     try{
         const store = await Store.findByIdAndUpdate(req.params.id,req.body);
         res.status(201).json({store :store._id })

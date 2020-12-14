@@ -3,7 +3,6 @@ const Store = require('../models/Store')
 exports.getStore =async (req, res, next) =>{
     try {
         const store = await Store.find()
-        // console.log(store)
 
         res.status(200).json({
             success: true,

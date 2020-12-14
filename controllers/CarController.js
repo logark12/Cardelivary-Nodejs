@@ -17,7 +17,6 @@ module.exports.upload_get = async (req, res) => {
 };
 
 module.exports.upload_post = async (req, res) => {
-    // console.log(req.body.img2)
     const {carName, CarType, img, img2} = req.body;
     const car = new Car({
       carName,
@@ -30,7 +29,6 @@ module.exports.upload_post = async (req, res) => {
     try{
       saveImage(car, img, img2);
         const newMovie = await car.save();
-        // console.log(newMovie);  
         res.redirect('/car')  ;
     }catch (err){
         console.log(err);    
@@ -45,7 +43,6 @@ function saveImage(movie, imgEncoded, imgEncoded2) {
     // The JSON.parse() method parses a JSON string, constructing the JavaScript value or object described by the string
     const img =  JSON.parse(imgEncoded);
     const img2 =  JSON.parse(imgEncoded2);
-    console.log( "JSON parse: "+ img);
     
     // CHECKING FOR JSON ENCODED IMAGE NOT NULL 
     // https://developer.mozilla.org/en-US/docs/Web/HTTP/Basics_of_HTTP/MIME_types
@@ -111,7 +108,6 @@ module.exports.updateDriver = (req, res) => {
 };
 
 module.exports.updateDriver_post = async (req, res) => {
-    // console.log(req.body.img)
     const {carName, CarType, img, img2} = req.body;
     // SETTING IMAGE AND IMAGE TYPES
     // const movie = {
@@ -121,7 +117,6 @@ module.exports.updateDriver_post = async (req, res) => {
     //     ContectPersonName,
     //     ContactPersonPhone
     // };
-    // console.log(movie)
     saveImage(req.body, img, img2);
     try{
         const Mymovie = await Car.findByIdAndUpdate(req.params.id,req.body);
@@ -140,7 +135,6 @@ module.exports.Asing_Driver_get = async (req, res) => {
 };
 
 module.exports.Asing_Driver_post = async (req, res) => {
-  console.log(req.body)
     try{
       const Assing = await AssingDriver.create(req.body);
       res.status(200).json({"success":"Asing Driver Hass Been Successfully"})
@@ -156,7 +150,6 @@ module.exports.Asing_Driver_update_get = async (req, res) => {
   const car = await Car.find()
   const driver = await Driver.find()
   const AssingD = await AssingDriver.findById(req.params.id)
-  console.log(AssingD._id)
   res.render('cars/Asignedit', {driver, car, AssingD})
 }
 
@@ -187,17 +180,14 @@ module.exports.Asing_Driver_delete = (req, res) => {
 // error HANDLLER
 
 const ErrorHandler = (err) => {
-  console.log(err.message)
   let errors = {Car: "", Driver: ""}
 
     if(err.code === 11000 && err.message.includes('Driver')){
         errors.Driver = 'the Driver Have Allrady a Car';
-        console.log(errors)
         return errors;
     }
     if(err.code === 11000 && err.message.includes('Car')){
         errors.Driver = 'the Car Allrady Have a Driver';
-        console.log(errors)
         return errors;
     }
 
