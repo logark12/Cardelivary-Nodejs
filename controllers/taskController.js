@@ -80,7 +80,6 @@ module.exports.task_update_post = async (req, res) => {
 
     try{
         const tasks = await Task.findByIdAndUpdate(req.params.id,req.body);
-        // res.status(201).json({movie :movie._id })
         res.redirect('/tasks')
     }catch(err){
         console.log(err)

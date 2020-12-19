@@ -129,23 +129,32 @@
                                         </thead>
                                         <tbody>
                                             
-                                <% if(movie.length > 0 ){ %>
+                                <% if(driver.length > 0 ){ %>
                                     <% let i = 1
                                                    
                                                 %>
-                                    <% movie.forEach(movie => { %>
+                                    <% driver.forEach(driver => { %>
                                             <tr>
                                                 
                                                 <th scope="row"><%= i %></th>
-                                                <td><%= movie.fullName %></td>
-                                                <td><%= movie.PhoneNumber %></td>
-                                                <td><%= movie.Address %></td>
-                                                <td><%= movie.ContectPersonName %></td>
-                                                <td><%= movie.ContactPersonPhone %></td>
+                                                <td><%= driver.fullName %></td>
+                                                <td><%= driver.PhoneNumber %></td>
+                                                <td><%= driver.Address %></td>
+                                                <td><%= driver.ContectPersonName %></td>
+                                                <td><%= driver.ContactPersonPhone %></td>
                                                 <td>
-                                                    <a class="btn btn-xs fa fa-eye fa-2x" id="edit_button1" title="Edit "  href="Driver/detail/<%=movie._id %>" style="color: #3b31fd;"></a>
-                                                    <a class="btn btn-xs far fa-edit fa-2x" id="edit_button1" title="Edit "  href="Driver/update/<%=movie._id %>" style="color: #ff9800;"></a>
-                                                    <a class="btn btn-xs ion fa fa-trash fa-2x" href="Driver/delete/<%=movie._id %>" title="Delete" style="color: #ec4561; ">&nbsp;</a>
+                                                    <a class="btn btn-xs fa fa-eye fa-2x" id="edit_button1" title="Edit "  href="Driver/detail/<%=driver._id %>" style="color: #3b31fd;"></a>
+                                                    <a class="btn btn-xs far fa-edit fa-2x" id="edit_button1" title="Edit "  href="Driver/update/<%=driver._id %>" style="color: #ff9800;"></a>
+                                                    <a class="btn btn-xs ion fa fa-trash fa-2x" href="Driver/delete/<%=driver._id %>" title="Delete" style="color: #ec4561; ">&nbsp;</a>
+                                                    
+                                                    <div class="modal fade bd-example-modal-sm" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+                                                        <div class="modal-dialog modal-sm">
+                                                            <div class="modal-content">
+                                                                <div id="map" style="width: 100%; height: 500px;border-radius: 5px;"
+                                                                ></div>
+                                                            </div>
+                                                        </div>
+                                                        </div>
                                                 </td>
                                                <%  i =i+1 %>
                                             </tr>

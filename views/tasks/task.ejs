@@ -144,9 +144,18 @@
                                                 <td><%= moment(task.endDate).format('hh:mm a MMM DD YYYY') %></td>
                                                 <td><%= task.teamMember %></td>
                                                 <td>
-                                                    
+                                                    <button class="btn btn-xs fas fa-tasks fa-2x"  type="button" data-toggle="modal" data-target=".bd-example-modal-sm" style="color: #3b31fd;"></button>
                                                     <a class="btn btn-xs far fa-edit fa-2x" id="edit_button1" title="Edit "  href="/tasks/update/<%=task._id %>" style="color: #ff9800;"></a>
                                                     <a class="btn btn-xs ion fa fa-trash fa-2x" href="/tasks/delete/<%=task._id %>" title="Delete" style="color: #ec4561; ">&nbsp;</a>
+                                                    
+                                                    <div class="modal fade bd-example-modal-sm" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+                                                        <div class="modal-dialog modal-sm">
+                                                            <div class="modal-content">
+                                                                <div  style="width: 100%; height: 300px;border-radius: 5px;"
+                                                                > <img style="width: 100%;" src="<%= task.QRcode %>" alt=""></div>
+                                                            </div>
+                                                        </div>
+                                                        </div>
                                                 </td>
                                                <%  i =i+1 %>
                                             </tr>

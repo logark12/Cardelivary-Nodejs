@@ -60,9 +60,9 @@ function saveImage(movie, imgEncoded, imgEncoded2) {
 
 module.exports.form_get = async (req, res) => {
     try{
-        const movie  = await Movie.find();
+        const driver  = await Movie.find();
         res.render('driver/Driver', {
-          movie
+          driver
         });
       }catch (err){
         console.log("err: "+ err); 
@@ -72,9 +72,9 @@ module.exports.form_get = async (req, res) => {
 module.exports.form_detail = async (req, res) => {
     const id = req.params.id
     try{
-        const movie  = await Movie.findById(id);
+        const driver  = await Movie.findById(id);
         res.render('driver/detail', {
-          movie
+          driver
         });
       }catch (err){
         console.log("err: "+ err); 
