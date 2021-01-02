@@ -130,13 +130,13 @@
                                             <tr>
                                                 <th scope="row"><%= i %></th>
                                                 <td><%= task.taskName %></td>
-                                                <%   if (task.status == "complete")
+                                                <%   if (task.endDate < date)
                                                 { %>
-                                                    <td><span style="font-size: 12px;" class='badge badge-success'><%= task.status %></span></td>
+                                                    <td><span style="font-size: 12px;" class='badge badge-success'>complete</span></td>
                                                     <%  }
                                                 else
                                                 {  %>
-                                                   <td><span style="font-size: 12px;" class='badge badge-info'><%= task.status %></span></td>
+                                                   <td><span style="font-size: 12px;" class='badge badge-info'>pending</span></td>
                                                    <%    }  %>
 
                                               

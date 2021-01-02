@@ -42,6 +42,7 @@ const storeSchema = mongoose.Schema({
 
 
 storeSchema.pre('save', function(next) {
+    console.log("hi")
             this.location = {
                 type: 'Point',
                 coordinates: [this.storeLocation1, this.storeLocation2],

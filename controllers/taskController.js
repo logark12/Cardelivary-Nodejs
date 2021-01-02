@@ -4,50 +4,16 @@ const Task = require('../models/task')
 const Driver = require('../models/Driver')
 const AssignDriver = require('../models/AssingDriver')
 
-const Driv = async () => {
-    try{
-        const driver = await AssignDriver.find()
-        .populate('Driver')
-    
-    }catch (err){
-        console.log(err)
-    }
-    
-}
-
-Driv()
-
-
-const checkTaskIsDone = async () => {
-    const tasks = await Task.find({})
-        
-        for(i= 0; i < tasks.length; i++){
-            
-            const date = new Date()
-            date.setHours( date.getHours() + 3 );
-            if (tasks[i].endDate < date){
-                tasks[i].status = 'complete'
-                tasks[i].save()
-                
-            }else if(tasks[i].endDate > date){
-                tasks[i].status = 'pending'
-                tasks[i].save()
-            }
-        }
-}
-
-
-
 module.exports.task_get = async (req, res) =>{
-
+    const date = new Date()
+    // date.setHours( date.getHours() + 3 )
     try {
-        checkTaskIsDone()
         const driver = await AssignDriver.find()
         .populate('Driver')
         
         const task = await Task.find()
         
-        res.render('tasks/task', {task, driver, moment} )
+        res.render('tasks/task', {task, driver, moment,date } )
     } catch (err) {
         console.log(err)
     }
@@ -84,7 +50,6 @@ module.exports.task_update_post = async (req, res) => {
     }catch(err){
         console.log(err)
     }
-
 
 }
 

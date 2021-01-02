@@ -36,19 +36,15 @@ const taskSchema = mongoose.Schema({
 
 taskSchema.pre('save', async function(next){
     const QRimage = await QR.toDataURL(this.taskName)
-
     this.QRcode = QRimage
+    
     const driver = await DriverModel.findOne({'PhoneNumber': this.teamMember});
     if (driver){
         this.Driver = driver._id
         next();
     }
     throw Error('NO driver have this NUMBER')
-
-    
 })
-
-
 
 taskModel = mongoose.model('task', taskSchema)
 module.exports = taskModel
